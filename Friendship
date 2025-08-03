@@ -1,0 +1,192 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friendship Day Card 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      overflow-x: hidden;
+      padding-top: 40px;
+      color: #333;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ff4081;
+    }
+
+    .emoji {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      animation: bounce 1.2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .input-section {
+      margin: 20px 0;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 25px;
+      border: 2px solid #ff4081;
+      outline: none;
+      width: 70%;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 15px;
+      background-color: #ff4081;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    .message-box {
+      margin-top: 30px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .message-box.visible {
+      opacity: 1;
+    }
+
+    .friend-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #673ab7;
+    }
+
+    .message {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #444;
+    }
+
+    .fireworks {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: yellow;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      to {
+        transform: scale(8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="emoji">🎂🎊💛😀</div>
+    <h1>Happy Friendship Day!</h1>
+
+    <div class="input-section">
+      <input type="text" id="friendInput" placeholder="Enter your friend's name" />
+      <br>
+      <button onclick="revealCard()">Show Message</button>
+    </div>
+
+    <div class="message-box" id="messageBox">
+      <div class="friend-name" id="friendNameText"></div>
+      <div class="message" id="friendMessage"></div>
+    </div>
+  </div>
+
+  <div class="fireworks" id="fireworks"></div>
+
+  <script>
+    const messages = [
+      "You're the rainbow in my stormy sky! 🌈",
+      "Friends like you are rare and precious! 💎",
+      "You light up my darkest days! 🔥",
+      "Thanks for always being weird with me! 😂",
+      "Life's better with you by my side! 🫂",
+      "You're the peanut butter to my jelly! 🥪",
+      "You're not just a friend… you're home. 🏡",
+      "Even silence feels comforting with you. 🤍",
+      "With you, even boring moments become memories! 📸",
+      "You're a real one in a world full of filters. 📷"
+    ];
+
+    function revealCard() {
+      const nameInput = document.getElementById('friendInput').value.trim();
+      const friendName = nameInput ? nameInput : "My Friend";
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+      document.getElementById('friendNameText').innerText = `For my best friend, ${friendName}`;
+      document.getElementById('friendMessage').innerText = randomMessage;
+      document.getElementById('messageBox').classList.add('visible');
+
+      launchFireworks();
+    }
+
+    function launchFireworks() {
+      const container = document.getElementById('fireworks');
+      for (let i = 0; i < 20; i++) {
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.style.top = Math.random() * window.innerHeight + 'px';
+        fw.style.left = Math.random() * window.innerWidth + 'px';
+        fw.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        container.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    }
+  </script>
+
+</body>
+</html>
